@@ -2,12 +2,36 @@ const fs = require("fs");
 const bodyParser = require("body-parser");
 const jsonServer = require("json-server");
 const jwt = require("jsonwebtoken");
-
 const server = jsonServer.create();
 const router = jsonServer.router("./data/users.json");
 
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
+
+// Add headers
+server.use(function(req, res, next) {
+  // Website you wish to allow to connect
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+
+  // Request methods you wish to allow
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+
+  // Request headers you wish to allow
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type"
+  );
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  // res.setHeader("Access-Control-Allow-Credentials", true);
+
+  // Pass to next layer of middleware
+  next();
+});
 
 const SECRET_WORD = "SECRET1234";
 const expiresIn = "1h";
@@ -28,7 +52,13 @@ const isAuth = ({ email, password }) =>
     user => user.email === email && user.password === password
   ) !== -1;
 
-server.post("/users/login", (req, res) => {
+server.options("/auth/login", (req, res) => {
+  const status = 200;
+  const message = "OK";
+  res.status(status).json({ status, message });
+});
+
+server.post("/auth/login", (req, res) => {
   const { email, password } = req.body;
   if (isAuth({ email, password }) === false) {
     const status = 401;
@@ -37,9 +67,10 @@ server.post("/users/login", (req, res) => {
     return;
   }
   const access_token = createToken({ email, password });
-  res.status(200).json({ access_token });
+  res.status(200).json({ access_token, success: true });
 });
 
+// server.use(/^(?!\/auth).*$/, async (req, res, next) => {
 server.use(/^(?!\/auth).*$/, async (req, res, next) => {
   if (
     req.headers.authorization === undefined ||
@@ -63,5 +94,5 @@ server.use(/^(?!\/auth).*$/, async (req, res, next) => {
 server.use(router);
 
 server.listen(3000, () => {
-  console.log("Run Auth API Server");
+  console.log("Running Auth API Server");
 });

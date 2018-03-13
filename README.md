@@ -62,3 +62,20 @@ Authorization: Bearer XXXXXX
   "message": "Error access_token is revoked"
 }
 ```
+
+### Resources
+
+Uses OAuth 2:
+https://security.stackexchange.com/questions/108662/why-is-bearer-required-before-the-token-in-authorization-header-in-a-http-re
+
+JSON Web Tokens (Basics/JWT)
+By signing we can just validate this token is sent by a particular identity server.
+https://medium.com/@piraveenaparalogarajah/json-web-tokens-jwt-basics-6515b13077e8
+
+Preflight requests with CORS
+https://github.com/angular/angular/issues/7445
+http://restlet.com/company/blog/2015/12/15/understanding-and-using-cors/
+
+```
+npm install cors
+```
