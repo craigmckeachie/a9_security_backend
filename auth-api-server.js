@@ -5,6 +5,10 @@ const jwt = require("jsonwebtoken");
 const server = jsonServer.create();
 const router = jsonServer.router("./data/users.json");
 
+//todo: const middlewares = jsonServer.defaults()
+//server.use(middlewares)
+//then remove options calls
+
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 
@@ -22,12 +26,12 @@ server.use(function(req, res, next) {
   // Request headers you wish to allow
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type"
+    "X-Requested-With,content-type, Authorization"
   );
 
   // Set to true if you need the website to include cookies in the requests sent
   // to the API (e.g. in case you use sessions)
-  // res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Credentials", true);
 
   // Pass to next layer of middleware
   next();
@@ -51,6 +55,12 @@ const isAuth = ({ email, password }) =>
   userdb.users.findIndex(
     user => user.email === email && user.password === password
   ) !== -1;
+
+server.options("/users/:id", (req, res) => {
+  const status = 200;
+  const message = "OK";
+  res.status(status).json({ status, message });
+});
 
 server.options("/auth/login", (req, res) => {
   const status = 200;

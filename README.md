@@ -75,6 +75,7 @@ https://medium.com/@piraveenaparalogarajah/json-web-tokens-jwt-basics-6515b13077
 Preflight requests with CORS
 https://github.com/angular/angular/issues/7445
 http://restlet.com/company/blog/2015/12/15/understanding-and-using-cors/
+https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 
 ```
 npm install cors
