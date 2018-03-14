@@ -80,3 +80,8 @@ https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 ```
 npm install cors
 ```
+
+todo:
+//const middlewares = jsonServer.defaults()
+//server.use(middlewares)
+//then remove options calls
