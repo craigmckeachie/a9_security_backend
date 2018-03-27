@@ -1,4 +1,4 @@
-# JSONServer + auth
+# JSONServer with Authentication
 
 MockWebAPI (JSON Server) with WebAPI authentication in Node.js.
 
