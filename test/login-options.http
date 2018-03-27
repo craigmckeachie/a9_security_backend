@@ -1,5 +1,0 @@
-OPTIONS http://localhost:3000/auth/login/ HTTP/1.1
-Origin: http://localhost:4200
-Access-Control-Request-Method: POST
-Access-Control-Request-Headers: content-type,accept
-Access-Control-Max-Age: 1728000
