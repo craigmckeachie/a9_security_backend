@@ -23,9 +23,11 @@ const verifyToken = token =>
     )
   );
 
-const userdb = JSON.parse(fs.readFileSync("./data/users.json", "UTF-8"));
+const userCredentials = JSON.parse(
+  fs.readFileSync("./data/user-credentials.json", "UTF-8")
+);
 const isAuth = ({ email, password }) =>
-  userdb.users.findIndex(
+  userCredentials.users.findIndex(
     user => user.email === email && user.password === password
   ) !== -1;
 
@@ -37,9 +39,16 @@ server.post("/auth/login", (req, res) => {
     res.status(status).json({ status, message });
     return;
   }
-  const access_token = createToken({ email, password });
+  // const access_token = createToken({ email, password });
+  const access_token = createToken(findUserByEmail(email));
   res.status(200).json({ access_token, success: true });
 });
+
+const usersdb = JSON.parse(fs.readFileSync("./data/users.json", "UTF-8"));
+
+const findUserByEmail = email => {
+  return usersdb.users.find(user => user.email === email);
+};
 
 server.use(/^(?!\/auth).*$/, async (req, res, next) => {
   if (

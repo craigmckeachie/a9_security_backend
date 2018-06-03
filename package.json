@@ -4,7 +4,7 @@
     "jsonwebtoken": "^7.4.2"
   },
   "scripts": {
-    "api": "json-server --watch ./data/books.json",
+    "api": "json-server --watch ./data/users.json",
     "api:auth": "node auth-api-server.js"
   }
 }
