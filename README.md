@@ -35,8 +35,8 @@ Content-Type: application/json
 }
 ```
 
-* See `data\users.json` for additional valid email/password combinations or to change them.
-  * Note: if you change data in `data\users.json` the server will need to be restarted before you will see the changes.
+- See `data\users.json` for additional valid email/password combinations or to change them.
+  - Note: if you change data in `data\users.json` the server will need to be restarted before you will see the changes.
 
 ### Response Body (200 OK)
 
@@ -71,13 +71,18 @@ Authorization: Bearer XXXXXX
 }
 ```
 
+### Response Body (200 Success)
+
+> Note that the body of the response currently returns JSON data with the password included because json-server just returns the contents of `users.json`. **DO NOT DO THIS**
+> Remember the body becomes the payload and is only base64 encoded so can be viewed on the client.
+
 ### Testing
 
 To test run the requests in the files inside the `test` directory using a tool like [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) in Visual Studio Code.
 
-* `login-post.http`
-* `user-get.http`
-  * The token that appears in the header after `Authorization: Bearer` will need to be updated from the response received from `login-post.http`.
+- `login-post.http`
+- `user-get.http`
+  - The token that appears in the header after `Authorization: Bearer` will need to be updated from the response received from `login-post.http`.
 
 These are the same requests a client application like `ngauth` makes.
 
