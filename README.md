@@ -71,11 +71,6 @@ Authorization: Bearer XXXXXX
 }
 ```
 
-### Response Body (200 Success)
-
-> Note that the body of the response currently returns JSON data with the password included because json-server just returns the contents of `users.json`. **DO NOT DO THIS**
-> Remember the body becomes the payload and is only base64 encoded so can be viewed on the client.
-
 ### Testing
 
 To test run the requests in the files inside the `test` directory using a tool like [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) in Visual Studio Code.
